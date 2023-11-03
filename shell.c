@@ -38,6 +38,7 @@ char **split_command(char *string)
 void execute(char *array[], char *const *environment)
 {
 	pid_t pid = fork();
+	(void)environment;
 
 	if (pid == -1)
 	{
@@ -46,7 +47,7 @@ void execute(char *array[], char *const *environment)
 	}
 	else if (pid == 0)
 	{
-		if (execve(array[0], array, environment) == -1)
+		if (execve(array[0], array, NULL) == -1)
 		{
 			perror("./shell");
 			exit(EXIT_FAILURE);
@@ -67,6 +68,7 @@ int main(int ac, char *argv[], char *envp[])
 	char *command = NULL;
 	size_t len = 0;
 	char **array = NULL;
+	ssize_t line_size = 0;
 
 	(void)ac;
 	(void)argv;
@@ -79,13 +81,11 @@ int main(int ac, char *argv[], char *envp[])
 	while (1)
 	{
 		prompt();
-		if (getline(&command, &len, stdin) == -1)
-		{
-			perror("Error reading input.");
-			free(command);
-			free(array);
-			exit(EXIT_FAILURE);
-		}
+		line_size = getline(&command, &len, stdin);
+		if (line_size < 0)
+			break;
+		if (command[line_size - 1] == '\n')
+			command[line_size - 1] = '\0';
 		array = split_command(command);
 		if (array == NULL)
 		{

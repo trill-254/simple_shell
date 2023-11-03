@@ -23,6 +23,6 @@ int my_isatty(int f_descriptor)
 
 void prompt(void)
 {
-	/*if (my_isatty(STDOUT_FILENO == 1) && (STDIN_FILENO == 1))*/
+	/*if (my_isatty(STDOUT_FILENO) && (STDIN_FILENO))*/
 		write(STDERR_FILENO, "$ ", 2);
 }
