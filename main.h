@@ -1,16 +1,15 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+#include <sys/stat.h>
+#include <stddef.h>
+#include <stdlib.h>
 #include <string.h>
+#include <sys/wait.h>
 
-#define BUFFER_SIZE 1024
-
+void prompt(void);
 char *read_line(void);
 int main(void);
 
-#endif /* MAIN_H */
+#endif /*Main_h*/
