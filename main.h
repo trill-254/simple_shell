@@ -11,6 +11,8 @@
 #include <fcntl.h>
 #include <sys/types.h>
 
+extern char **environ;
+
 int prompt(void);
 
 #endif
