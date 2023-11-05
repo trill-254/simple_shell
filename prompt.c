@@ -21,8 +21,13 @@ int my_isatty(int f_descriptor)
  * Reuturn: Nothing
  */
 
-void prompt(void)
+int prompt(void)
 {
-	/*if (my_isatty(STDOUT_FILENO) && (STDIN_FILENO))*/
+	if (isatty(STDIN_FILENO))
+	{
 		write(STDERR_FILENO, "$ ", 2);
+		return (-1);
+	}
+	else
+		return (0);
 }

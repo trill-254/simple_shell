@@ -11,6 +11,6 @@
 #include <fcntl.h>
 #include <sys/types.h>
 
-void prompt(void);
+int prompt(void);
 
 #endif

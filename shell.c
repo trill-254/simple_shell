@@ -1,6 +1,23 @@
 #include "main.h"
 
 /**
+ * _strlen - counts the lenght of a string and returns the number
+ * @str: string whose length is to be determined
+ *
+ * Return: length of the string
+ */
+int _strlen(const char *str)
+{
+	int len = 0;
+	while (*str != '\0')
+	{
+		len++;
+		str++;
+	}
+	return len;
+}
+
+/**
  * split_command - splits the commands entered by the user
  * @str: commands entered by user
  *
@@ -9,7 +26,7 @@
 
 char **split_command(char *string)
 {
-	char **result = malloc(sizeof(char*) * strlen(string));
+	char **result = malloc(sizeof(char*) * _strlen(string));
 	char *token = strtok(string, " ");
 	int i = 0;
 
@@ -32,7 +49,7 @@ char **split_command(char *string)
  * execute - shifts the process to execute another program
  * @array: list of the commands that are passed to the prompt
  *
- * Return: NOthing
+ * Return: Nothing
  */
 
 void execute(char *array[], char *const *environment)
@@ -82,7 +99,7 @@ int main(int ac, char *argv[], char *envp[])
 	{
 		prompt();
 		line_size = getline(&command, &len, stdin);
-		if (line_size < 0)
+		if (line_size <= 0)
 			break;
 		if (command[line_size - 1] == '\n')
 			command[line_size - 1] = '\0';
