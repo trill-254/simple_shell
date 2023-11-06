@@ -14,5 +14,12 @@
 extern char **environ;
 
 int prompt(void);
+void _strcat(char *dest, const char *src);
+void _strcpy(char *dest, const char *src);
+int _strncmp(const char *s1, const char *s2, size_t n);
+int _strlen(const char *str);
+char **split_command(char *string);
+char *_getenv(const char *name);
+void execute(char *array[], char *const *environment);
 
 #endif
