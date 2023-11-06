@@ -28,10 +28,21 @@ int main(int ac, char *argv[], char *envp[])
 	{
 		prompt();
 		line_size = getline(&command, &len, stdin);
+		/*handle the EOF command using ctrl D*/
+		if (line_size == -1)
+		{
+			write(1, "\n", 1);
+			free(command);
+			free(array);
+			exit(EXIT_SUCCESS);
+		}
+		/*End of EOF*/
 		if (line_size <= 0)
 			break;
 		if (command[line_size - 1] == '\n')
 			command[line_size - 1] = '\0';
+		if (command[0] == '\n' || command [0] == '\0')
+			continue;
 		array = split_command(command);
 		if (array == NULL)
 		{
