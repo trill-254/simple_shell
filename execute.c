@@ -21,7 +21,7 @@ void execute(char *array[], char *const *environment)
 		exit(EXIT_FAILURE); }
 	else if (pid == 0)
 	{
-		if (array[0][0] == '/')
+		if (array[0][0] == '/' || array[0][0] == '.')
 		{
 			if (stat(array[0], &st) == 0 && S_ISREG(st.st_mode))
 			{
