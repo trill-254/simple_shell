@@ -22,44 +22,33 @@ int main(int ac, char *argv[], char *envp[])
 	if (array == NULL)
 	{
 		perror("Error allocating memory for array");
-		exit(EXIT_FAILURE);
-	}
+		exit(EXIT_SUCCESS); }
 	while (1)
 	{
 		prompt();
 		line_size = getline(&command, &len, stdin);
-		/*handle the EOF command using ctrl D*/
-		if (line_size == -1)
+		if (line_size == -1 || line_size == EOF)
 		{
-			write(1, "\n", 1);
 			free(command);
-			free(array);
-			exit(EXIT_SUCCESS);
-		}
-		/*End of EOF*/
+			end_of_file(array); }
 		if (line_size <= 0)
 			break;
 		if (command[line_size - 1] == '\n')
 			command[line_size - 1] = '\0';
-		if (command[0] == '\n' || command [0] == '\0')
+		if (command[0] == '\n' || command[0] == '\0')
 			continue;
 		array = split_command(command);
 		if (array == NULL)
 		{
 			perror("Error splitting command.");
 			free(command);
-			free(array);
-			exit(EXIT_FAILURE);
-		}
+			exit(EXIT_FAILURE); }
 		if (_strncmp(array[0], "exit", 4) == 0)
 		{
 			free(command);
 			free(array);
-			exit(0);
-		}
+			exit(0); }
 		else
 			execute(array, (char *const *)envp);
-		free(array);
-	}
-	return (0);
-}
+		free(array); }
+	return (0); }

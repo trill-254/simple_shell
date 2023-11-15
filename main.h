@@ -21,5 +21,6 @@ int _strlen(const char *str);
 char **split_command(char *string);
 char *_getenv(const char *name);
 void execute(char *array[], char *const *environment);
+void end_of_file(char **array);
 
 #endif
