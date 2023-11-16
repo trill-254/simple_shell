@@ -18,11 +18,6 @@ int main(int ac, char *argv[], char *envp[])
 
 	(void)argv;
 	(void)ac;
-	array = malloc(1024 * sizeof(char *));
-	if (array == NULL)
-	{
-		perror("Error allocating memory for array");
-		exit(EXIT_SUCCESS); }
 	while (1)
 	{
 		prompt();
