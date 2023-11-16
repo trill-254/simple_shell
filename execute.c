@@ -21,7 +21,7 @@ void execute(char *array[], char *const *environment)
 		exit(EXIT_FAILURE); }
 	else if (pid == 0)
 	{
-		if (array[0][0] == '/')
+		if (array[0][0] == '/' || array[0][0] == '.')
 		{
 			if (stat(array[0], &st) == 0 && S_ISREG(st.st_mode))
 			{
@@ -32,7 +32,7 @@ void execute(char *array[], char *const *environment)
 		else
 		{
 			path = _getenv("PATH");
-			token = strtok(path, ":");
+			token = _strtok(path, ":");
 			while (token != NULL)
 			{ _strcpy(command_path, token);
 				_strcat(command_path, "/");
@@ -43,7 +43,7 @@ void execute(char *array[], char *const *environment)
 					{
 						perror("./shell");
 						exit(EXIT_FAILURE); }}
-				token = strtok(NULL, ":"); }
+				token = _strtok(NULL, ":"); }
 			write(STDERR_FILENO, "Command not found: ", 19);
 			write(STDERR_FILENO, array[0], _strlen(array[0]));
 			write(STDERR_FILENO, "\n", 1);

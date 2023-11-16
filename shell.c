@@ -18,21 +18,15 @@ int main(int ac, char *argv[], char *envp[])
 
 	(void)argv;
 	(void)ac;
-	array = malloc(1024 * sizeof(char *));
-	if (array == NULL)
-	{
-		perror("Error allocating memory for array");
-		exit(EXIT_SUCCESS); }
 	while (1)
 	{
 		prompt();
 		line_size = getline(&command, &len, stdin);
-		if (line_size == -1 || line_size == EOF)
-		{
-			free(command);
-			end_of_file(array); }
+		check_line(line_size, command);
 		if (line_size <= 0)
 			break;
+		if (is_all_spaces(command))
+			continue;
 		if (command[line_size - 1] == '\n')
 			command[line_size - 1] = '\0';
 		if (command[0] == '\n' || command[0] == '\0')

@@ -10,7 +10,7 @@
 char **split_command(char *string)
 {
 	char **result = malloc(sizeof(char *) * _strlen(string));
-	char *token = strtok(string, " ");
+	char *token = _strtok(string, " ");
 	int i = 0;
 
 	if (result == NULL)
@@ -22,7 +22,7 @@ char **split_command(char *string)
 	while (token != NULL)
 	{
 		result[i++] = token;
-		token = strtok(NULL, " ");
+		token = _strtok(NULL, " ");
 	}
 	result[i] = NULL;
 	return (result);

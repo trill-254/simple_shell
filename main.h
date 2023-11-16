@@ -10,6 +10,7 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include <sys/types.h>
+#include <stdbool.h>
 
 extern char **environ;
 
@@ -22,5 +23,8 @@ char **split_command(char *string);
 char *_getenv(const char *name);
 void execute(char *array[], char *const *environment);
 void end_of_file(char **array);
+bool is_all_spaces(const char *str);
+void check_line(ssize_t line_size, char *command);
+char *_strtok(char *str, char *delim);
 
 #endif
