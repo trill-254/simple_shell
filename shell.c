@@ -18,6 +18,7 @@ int main(int ac, char *argv[], char *envp[])
 
 	(void)argv;
 	(void)ac;
+	(void)envp;
 	while (1)
 	{
 		prompt();
@@ -36,12 +37,17 @@ int main(int ac, char *argv[], char *envp[])
 		{
 			perror("Error splitting command.");
 			free(command);
-			exit(EXIT_FAILURE); }
+			exit(EXIT_FAILURE);
+		}
 		if (_strncmp(array[0], "exit", 4) == 0)
+			execute_exit(array, command);
+		if (_strncmp(array[0], "env", 3) == 0)
 		{
 			free(command);
 			free(array);
-			exit(0); }
+			execute_env();
+			break;
+		}
 		else
 			execute(array, (char *const *)envp);
 		free(array); }
